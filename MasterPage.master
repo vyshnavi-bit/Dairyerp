@@ -1,0 +1,416 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head id="Head1" runat="server">
+    <meta charset="utf-8">
+    <link rel="icon" href="images/vyshnavilogo.png" type="image/x-icon" title="Dairy ERP" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Plant ERP</title>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+    <script src="js/jquery-1.4.4.js" type="text/javascript"></script>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        name="viewport">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="JSF/jquery.min.js"></script>
+    <script src="JSF/jquery-ui.js" type="text/javascript"></script>
+    <link href="JSF/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="JSF/jquery.blockUI.js" type="text/javascript"></script>
+    <link href="css/formstable.css" rel="stylesheet" type="text/css" />
+    <link href="css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="css/skel.css" rel="stylesheet" type="text/css" />
+    <link href="css/fleetStyles.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        body
+        {
+            webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: 'Source Sans Pro' , 'Helvetica Neue' ,Helvetica,Arial,sans-serif;
+            font-weight: 400;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="skin-blue sidebar-mini">
+     <script type="text/javascript">
+         $(function () {
+             var BranchType = '<%=Session["BranchType"] %>';
+             var leveltype = '<%=Session["leveltype"] %>';
+             if (BranchType == "CC") {
+                 $('#lidash').css('display', 'none');
+                 $('#limaster').css('display', 'none ');
+                 $('#liinwarddc').css('display', 'none ');
+                 $('#liinward').css('display', 'none ');
+                 $('#lioutward').css('display', 'none ');
+                 $('#liinwardsilo').css('display', 'none ');
+                 $('#lioutwardsilo').css('display', 'none ');
+                 $('#lidespatch_entry').css('display', 'block ');
+                 $('#liout_despatch').css('display', 'none ');
+                 $('#liBranchwiseReport').css('display', 'none ');
+                 $('#liOutward_dc_report').css('display', 'none ');
+                 $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                 $('#liweigh_bridge').css('display', 'none ');
+                 $('#lirpttankerinward').css('display', 'none ');
+                 $('#lirpttankeroutward').css('display', 'none ');
+                 $('#lirptinwarddespatch').css('display', 'none ');
+                 $('#lirpt_vendor').css('display', 'none ');
+                 $('#lirptdespatch').css('display', 'block ');
+
+                 $('#lishiftclosing').css('display', 'none ');
+
+                 $('#liVendortsratechange').css('display', 'none ');
+                 $('#liApprovalVendortsratechange').css('display', 'none ');
+                 $('#lidashboard').css('display', 'none ');
+                 $('#limaster').css('display', 'none ');
+                 $('#lisilomonitor').css('display', 'none ');
+                 $('#liintrasilotransaction').css('display', 'none ');
+                 $('#liprocessingReort').css('display', 'none ');
+
+                 $('#liliApprovalVendortsratechange').css('display', 'none ');
+                 $('#liliVendortsratechange').css('display', 'none ');
+                 $('#liprocessingReort').css('display', 'none ');
+                 $('#lilisilomonitor').css('display', 'none ');
+                 $('#liIntrasiloTransaction').css('display', 'none ');
+                 $('#lishiftwise_closing').css('display', 'none ');
+                 $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                 $('#lishiftwise_closing').css('display', 'none ');
+                 $('#liBatchentry').css('display', 'none ');
+
+             }
+             if (BranchType == "Plant") {
+                 if (leveltype == "Processing") {
+                     $('#liinwardsilo').css('display', 'block');
+                     $('#lioutwardsilo').css('display', 'block ');
+                     $('#liIntrasiloTransaction').css('display', 'block ');
+                     $('#lishiftwise_closing').css('display', 'block ');
+                     $('#liDepartmentwiseqtydetails').css('display', 'block ');
+                     $('#liReturn_milk').css('display', 'block ');
+                     $('liprocessingReport').css('display', 'block');
+                     $('li8').css('display', 'block');
+                     $('li9').css('display', 'block');
+                     $('li10').css('display', 'block');
+                     $('li11').css('display', 'block');
+                     $('li12').css('display', 'block');
+                     $('#lirpttankerinward').css('display', 'none ');
+                     $('#lirpttankeroutward').css('display', 'none ');
+                     $('#lirptinwarddespatch').css('display', 'none ');
+                     $('#lirpt_vendor').css('display', 'none ');
+                     $('#lirptdespatch').css('display', 'none ');
+                     $('#liBranchwiseReport').css('display', 'none ');
+                     $('#liOutward_dc_report').css('display', 'none ');
+                     $('#lidashboard').css('display', 'none');
+                     $('#limaster').css('display', 'none ');
+                     $('#liinwarddc').css('display', 'none ');
+                     $('#liinward').css('display', 'none ');
+                     $('#lioutward').css('display', 'none ');
+                     $('#lirpt_total_dc').css('display', 'none');
+                     $('#lidespatch_entry').css('display', 'none ');
+                     $('#liout_despatch').css('display', 'none ');
+                     $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                     $('#liweigh_bridge').css('display', 'none ');
+                     $('#lishiftclosing').css('display', 'none ');
+                     $('#liVendortsratechange').css('display', 'none ');
+                     $('#liApprovalVendortsratechange').css('display', 'none ');
+                     $('lireports').css('display', 'none');
+
+                 }
+                 if (leveltype == "Operations") {
+                     $('#lirpttankerinward').css('display', 'block ');
+                     $('#lirpttankeroutward').css('display', 'block ');
+                     $('#lirptinwarddespatch').css('display', 'block ');
+                     $('#lirpt_vendor').css('display', 'block ');
+                     $('#lirptdespatch').css('display', 'block ');
+                     $('#liprocessingReort').css('display', 'block ');
+                     $('#liprocessingReort').css('display', 'block ');
+                     $('#liBranchwiseReport').css('display', 'block ');
+                     $('#liOutward_dc_report').css('display', 'block ');
+
+                     $('#lidash').css('display', 'none');
+                     $('#limaster').css('display', 'none ');
+                     $('#liinwarddc').css('display', 'none ');
+                     $('#liinward').css('display', 'none ');
+                     $('#lioutward').css('display', 'none ');
+                     $('#liinwardsilo').css('display', 'none ');
+                     $('#lioutwardsilo').css('display', 'none ');
+                     $('#lidespatch_entry').css('display', 'none ');
+                     $('#liout_despatch').css('display', 'none ');
+                     $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                     $('#liweigh_bridge').css('display', 'none ');
+                     $('#lishiftclosing').css('display', 'none ');
+                     $('#liVendortsratechange').css('display', 'none ');
+                     $('#liApprovalVendortsratechange').css('display', 'none ');
+                 }
+                 if (leveltype == "lab") {
+                     $('#lirpttankerinward').css('display', 'none ');
+                     $('#lirpttankeroutward').css('display', 'none ');
+                     $('#lirptinwarddespatch').css('display', 'none ');
+                     $('#lirpt_vendor').css('display', 'none ');
+                     $('#lirptdespatch').css('display', 'none ');
+                     $('#liprocessingReort').css('display', 'none ');
+                     $('#liprocessingReort').css('display', 'none ');
+                     $('#liBranchwiseReport').css('display', 'none ');
+                     $('#liOutward_dc_report').css('display', 'none ');
+
+                     $('#lidash').css('display', 'none');
+                     $('#limaster').css('display', 'none ');
+                     $('#liinwarddc').css('display', 'none ');
+                     $('#liinward').css('display', 'block ');
+                     $('#lioutward').css('display', 'block ');
+                     $('#liinwardsilo').css('display', 'none ');
+                     $('#lioutwardsilo').css('display', 'none ');
+                     $('#lidespatch_entry').css('display', 'none ');
+                     $('#liout_despatch').css('display', 'none ');
+                     $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                     $('#liweigh_bridge').css('display', 'none ');
+                     $('#lishiftclosing').css('display', 'none ');
+                     $('#liVendortsratechange').css('display', 'none ');
+                     $('#liApprovalVendortsratechange').css('display', 'none ');
+                     $('#liTankerInwardApproval3').css('display', 'none ');
+                     $('#lilisilomonitor').css('display', 'none ');
+                     $('#liBatchentry').css('display', 'none ');
+                     $('#liIntrasiloTransaction').css('display', 'none ');
+                     $('#lishiftwise_closing').css('display', 'none ');
+                     $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                     $('#liReturn_milk').css('display', 'none ');
+                     $('#lirpttankerinward').css('display', 'block ');
+                     $('#liBranchwiseReport').css('display', 'block ');
+                     $('#liVehicleWiseSummeryReport').css('display', 'block ');
+                     $('#lirpttankeroutward').css('display', 'block ');
+                     $('#lirptdespatch').css('display', 'block ');
+                     $('#liOutward_dc_report').css('display', 'block ');
+                     $('#lirpt_total_dc').css('display', 'block ');
+                     $('#lirpt_vendor').css('display', 'block ');
+
+                 }
+                 if (leveltype == "Security") {
+                     $('#liinward').css('display', 'block ');
+                     $('#lioutward').css('display', 'block ');
+                     $('#lidash').css('display', 'none');
+                     $('#limaster').css('display', 'none ');
+                     $('#liinwarddc').css('display', 'none ');
+                     $('#liinwardsilo').css('display', 'none ');
+                     $('#lioutwardsilo').css('display', 'none ');
+                     $('#lidespatch_entry').css('display', 'none ');
+                     $('#liout_despatch').css('display', 'none ');
+                     $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                     $('#liweigh_bridge').css('display', 'none ');
+                     $('#liBranchwiseReport').css('display', 'none ');
+                     $('#liOutward_dc_report').css('display', 'none ');
+                     $('#lirpttankerinward').css('display', 'none ');
+                     $('#lirpttankeroutward').css('display', 'none ');
+                     $('#lirptinwarddespatch').css('display', 'none ');
+                     $('#lirpt_vendor').css('display', 'none ');
+                     $('#lirptdespatch').css('display', 'none ');
+                     $('#lishiftclosing').css('display', 'none ');
+                     $('#liVendortsratechange').css('display', 'none ');
+                     $('#liprocessingReort').css('display', 'none ');
+                     $('#liApprovalVendortsratechange').css('display', 'none ');
+                 }
+                 else {
+                     if (leveltype == "Admin") {
+                         $('#lidash').css('display', 'block');
+                         $('#limaster').css('display', 'block ');
+                         $('#liinwarddc').css('display', 'block ');
+                         $('#liinward').css('display', 'block ');
+                         $('#lioutward').css('display', 'block ');
+                         $('#liinwardsilo').css('display', 'block ');
+                         $('#lioutwardsilo').css('display', 'block ');
+                         $('#lidespatch_entry').css('display', 'none ');
+                         $('#liout_despatch').css('display', 'block ');
+                         $('#liVehicleWiseSummeryReport').css('display', 'block ');
+                         $('#liweigh_bridge').css('display', 'block ');
+                         $('#liBranchwiseReport').css('display', 'block ');
+                         $('#liOutward_dc_report').css('display', 'block ');
+                         $('#lirpttankerinward').css('display', 'block ');
+                         $('#lirpttankeroutward').css('display', 'block ');
+                         $('#lirptinwarddespatch').css('display', 'block ');
+                         $('#lirpt_vendor').css('display', 'block ');
+                         $('#lirptdespatch').css('display', 'block ');
+                         $('#lishiftclosing').css('display', 'block ');
+                         $('#liVendortsratechange').css('display', 'block ');
+                         $('#liprocessingReort').css('display', 'block ');
+                         $('#liApprovalVendortsratechange').css('display', 'none ');
+                     }
+
+                 }
+             }
+         });
+    </script>
+    <form id="Form1" runat="server">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="Default.aspx" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>V</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Vyshnavi Dairy</b></span> </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><span class="sr-only">
+                    Toggle navigation</span> </a>
+                <div class="navbar-custom-menu">
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <!-- Messages: style can be found in dropdown.less-->
+                            <li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span>Welcome:</span>
+                                <asp:Label runat="server" Font-Bold="true" ID="lblMessage"></asp:Label><span class="label label-success"></span>
+                            </a></li>
+                            <li class=""><a href="LogOut.aspx" class="" data-toggle="" style="font-size: 20px;">
+                                <i class="fa fa-lock"></i><span>Log Out</span> </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                </div>
+           <ul class="sidebar-menu">
+                    <%--  <li class="header">MAIN NAVIGATION</li>--%>
+                    <li id="lidashboard" class="active treeview"><a href="#"><i class="fa fa-dashboard"></i><span>Dashboard</span>
+                        <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li class="active"><a href="Dashboard.aspx"><i class="fa fa-circle-o"></i>InTrasist
+                                DashBoard</a></li>
+                            <li><a href="Silo_dashBoard.aspx"><i class="fa fa-circle-o"></i>Silo Dashboard </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="limaster" class="treeview"><a href="#"><i class="fa fa-share"></i><span>Masters</span> <span
+                        class="label label-primary pull-right"></span></a>
+                        <ul class="treeview-menu">
+                            <li class="active"><a href="AddBranch.aspx"><i class="fa fa-share"></i>Branch</a></li>
+                            <li class="active"><a href="Departments.aspx"><i class="fa fa-share"></i>Departments</a></li>
+                            <li class="active"><a href="EmployeeDetails.aspx"><i class="fa fa-share"></i>EmployeeDetails</a></li>
+                            <li><a href="Vendor.aspx"><i class="fa fa-share"></i>Vendors</a></li>
+                            <li><a href="SendSMS.aspx"><i class="fa fa-share"></i>Send Sms</a></li>
+                            <li><a href="VehicleMaster.aspx"><i class="fa fa-share"></i>Vehicle Master</a></li>
+                            <li><a href="Silo.aspx"><i class="fa fa-share"></i>Add Silo</a></li>
+                            <li><a href="SiloDepartment.aspx"><i class="fa fa-share"></i>Add Processing Deportments</a></li>
+                            <li><a href="addshift.aspx"><i class="fa fa-share"></i>Add Shift</a></li>
+                            <li><a href="shiftwise_closing.aspx"><i class="fa fa-share"></i>Shift Wise Closing</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview"><a href="#"><i class="fa fa-pie-chart"></i><span>Operations</span>
+                        <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="lidespatch_entry"><a href="Despatch_Entry.aspx"><i class="fa fa-circle-o"></i>
+                                Despatch Entry</a></li>
+                            <li id="liinwarddc"><a href="Inward_dc_varify.aspx"><i class="fa fa-circle-o"></i>Inward
+                                DC Varify</a></li>
+                            <li id="liweigh_bridge"><a href="weigh_bridge.aspx"><i class="fa fa-circle-o"></i>Weigh
+                                Bridge</a></li>
+                            <li id="liliVendortsratechange"><a href="TS_RateChangeform.aspx"><i class="fa fa-circle-o"></i>Vendor TS
+                                Rate Change</a></li>
+                            <li id="liliApprovalVendortsratechange"><a href="Approval_Vendor_TSRate.aspx"><i class="fa fa-circle-o"></i>Approval
+                                Vendor TS Rates</a></li>
+                            <li id="liout_despatch"><a href="Out_despatch.aspx"><i class="fa fa-circle-o"></i>Out
+                                Despatch Entry</a></li>
+                            <%--   <li id="li4"><a href="Inward_Despatch_varify.aspx"><i class="icon-circle-blank">
+                            </i>Outward DC Varify</a></li>--%>
+                            <li id="liinward"><a href="Inward.aspx"><i class="fa fa-circle-o"></i>Inward</a></li>
+                            <li id="lioutward"><a href="Outward.aspx"><i class="fa fa-circle-o"></i>Outward</a></li>
+                            <li id="lilisilomonitor"><a href="SiloMonitor.aspx"><i class="fa fa-circle-o"></i>Silo Monitor</a></li>
+                            <li id="liinwardsilo"><a href="InwardSilo.aspx"><i class="fa fa-circle-o"></i>Inward
+                                Silo</a></li>
+                            <li id="lioutwardsilo"><a href="OutwardSilo.aspx"><i class="fa fa-circle-o"></i>Outward
+                                Silo</a></li>
+                            <li id="liIntrasiloTransaction"><a href="IntrasiloTransaction.aspx"><i class="fa fa-circle-o"></i>Intra
+                                Silo Transaction</a></li>
+                                 <li id="lishiftwise_closing"><a href="shiftwise_closing.aspx"><i class="fa fa-circle-o"></i>Shift Closing</a></li>
+                                   <li id="liDepartmentwiseqtydetails"><a href="Departmentwiseqtydetails.aspx"><i class="fa fa-circle-o"></i>Department Wise Qty Details</a></li>
+                                   <li id="liReturn_milk"><a href="Return_milk.aspx"><i class="fa fa-circle-o"></i>Return Milk</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview"><a href="#"><i class="fa fa-laptop"></i><span>Reports</span> <i
+                        class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="lirpttankerinward"><a href="TankersInwardReport.aspx"><i class="fa fa-edit">
+                            </i>Tankers Inward Report</a></li>
+                            <li id="liBranchwiseReport"><a href="BranchwiseReport.aspx"><i class="fa fa-edit"></i>
+                                Branch Summary Report</a></li>
+                            <li id="liVehicleWiseSummeryReport"><a href="VehicleWiseSummeryReport.aspx"><i class="fa fa-edit">
+                            </i>Vehicle Wise Summary Report</a></li>
+                            <li id="lirpttankeroutward"><a href="TankerOutwardReport.aspx"><i class="fa fa-edit">
+                            </i>Tankers Outward Report</a></li>
+                            <li id="lirptinwarddespatch"><a href="InwardReport.aspx"><i class="fa fa-edit"></i>Inward
+                                Despatch Report</a></li>
+                            <li id="lirptdespatch"><a href="DespatchReport.aspx"><i class="fa fa-edit"></i>Old Despatch
+                                Report</a></li>
+                                <li id="lirptinvoice"><a href="invoice.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>Despatch Report</a></li>
+                            <li id="liOutward_dc_report"><a href="Outward_dc_report.aspx"><i class="fa fa-edit">
+                            </i>Outward DC Report</a></li>
+                            <li id="lirpt_total_dc"><a href="Total_dc_report.aspx"><i class="fa fa-edit"></i>Total
+                                Despatch Report</a></li>
+                            <li id="lirpt_vendor"><a href="vendor_details_report.aspx"><i class="fa fa-edit"></i>
+                                Vendor Details Report</a></li>
+                        </ul>
+                    </li>
+                       <li id="liprocessingReort" class="treeview"><a href="#"><i class="fa fa-laptop"></i><span>Processing Reports</span> <i
+                        class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                          <li id="li8"><a href="Inward_Silo_Report.aspx"><i class="fa fa-circle-o"></i>Inward Silo Report</a></li>
+                            <li id="li9"><a href="Intra_Silo_Transaction_Report.aspx"><i class="fa fa-circle-o"></i>Intra Silo Transaction Report</a></li>
+                            <li id="li11"><a href="Outward_Silo_Report.aspx"><i class="fa fa-circle-o"></i>Outward Silo Report</a></li>
+                            <li id="li12"><a href="ShiftClosingReport.aspx"><i class="fa fa-circle-o"></i>Shift Wise Silo Closing Report</a></li>
+                            <li id="li10"><a href="Return_milk_detailsReport.aspx"><i class="fa fa-circle-o"></i>Return Milk Details Report</a></li>
+                        </ul>
+                        </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+    </form>
+    <footer class="main-footer">
+       
+<div class="pull-right hidden-xs">
+</div>
+        <strong>Copyright &copy; 2014-2015 <a href="http://vyshnavifoods.com">Sri Vyshnavi Dairy
+            Spl Pvt Ltd</a>.</strong> All rights reserved.
+      </footer>
+    <!-- Control Sidebar -->
+    <div class="control-sidebar-bg">
+    </div>
+</body>
+</html>
+<script>
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.4 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>

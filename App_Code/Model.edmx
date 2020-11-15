@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Alias="Self" Namespace="Dairy_ERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008">
+        <EntityContainer Name="Dairy_ERPModelStoreContainer">
+          <EntitySet Name="personalinfo" EntityType="Dairy_ERPModel.Store.personalinfo" Schema="dbo" store:Type="Tables" store:Name="personalinfo">
+            <!--<DefiningQuery>SELECT 
+      [personalinfo].[sno] AS [sno], 
+      [personalinfo].[name] AS [name], 
+      [personalinfo].[mobno] AS [mobno], 
+      [personalinfo].[email] AS [email], 
+      [personalinfo].[msgtype] AS [msgtype], 
+      [personalinfo].[branchid] AS [branchid]
+      FROM [dbo].[personalinfo] AS [personalinfo]</DefiningQuery>-->
+          </EntitySet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Dairy_ERP.dbo.personalinfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="personalinfo">
+          <Key>
+            <PropertyRef Name="sno" />
+          </Key>
+          <Property Name="sno" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="name" MaxLength="50" Type="varchar" />
+          <Property Name="mobno" MaxLength="12" Type="varchar" />
+          <Property Name="email" MaxLength="50" Type="varchar" />
+          <Property Name="msgtype" MaxLength="20" Type="varchar" />
+          <Property Name="branchid" Type="int" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Dairy_ERPModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Dairy_ERPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="personalinfoes" EntityType="Dairy_ERPModel.personalinfo" />
+        </EntityContainer>
+        <EntityType Name="personalinfo">
+          <Key>
+            <PropertyRef Name="sno" />
+          </Key>
+          <Property Name="sno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="mobno" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="msgtype" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="branchid" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Dairy_ERPModelStoreContainer" CdmEntityContainer="Dairy_ERPEntities">
+          <EntitySetMapping Name="personalinfoes">
+            <EntityTypeMapping TypeName="Dairy_ERPModel.personalinfo">
+              <MappingFragment StoreEntitySet="personalinfo">
+                <ScalarProperty Name="sno" ColumnName="sno" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="mobno" ColumnName="mobno" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="msgtype" ColumnName="msgtype" />
+                <ScalarProperty Name="branchid" ColumnName="branchid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model" DisplayType="true">
+        <EntityTypeShape EntityType="Dairy_ERPModel.personalinfo" Width="1.5" PointX="0.75" PointY="0.75" Height="2.172587890625" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,3070 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Operations.master.cs" Inherits="Operations" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <style type="text/css">
+        *
+        {
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+        ul
+        {
+            list-style: none;
+        }
+        .navigation
+        {
+            margin: 0px 0;
+            font: bold 12px/18px "Helvetica Neue" , Helvetica, Arial, sans-serif;
+            color: #444;
+            width: 100%;
+            -webkit-box-shadow: 0 1px rgba(255,255,255,1) inset;
+            background: #F7F7F7; /* Old browsers */
+            background: -moz-linear-gradient(top, #F7F7F7 0%, #EDEDED 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F7F7F7), color-stop(100%,#EDEDED)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, #F7F7F7 0%,#EDEDED 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, #F7F7F7 0%,#EDEDED 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, #F7F7F7 0%,#EDEDED 100%); /* IE10+ */
+            background: linear-gradient(top, #F7F7F7 0%,#EDEDED 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F7F7F7', endColorstr='#EDEDED',GradientType=0 ); /* IE6-9 */
+        }
+        .navigation:after
+        {
+            clear: both;
+            content: ".";
+            display: block;
+            height: 0;
+            visibility: hidden;
+        }
+        
+        .navigation ul
+        {
+            float: left;
+            border-radius: 0px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+            -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+        }
+        
+        .navigation li
+        {
+            float: left;
+            border-style: solid;
+            border-width: 1px;
+            border-color: #BABABA #BABABA #BABABA #FFF;
+            box-shadow: 0 1px rgba(255,255,255,1) inset;
+            -webkit-box-shadow: 0 1px rgba(255,255,255,1) inset;
+            background: #F7F7F7; /* Old browsers */
+            background: -moz-linear-gradient(top, #F7F7F7 0%, #EDEDED 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F7F7F7), color-stop(100%,#EDEDED)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, #F7F7F7 0%,#EDEDED 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, #F7F7F7 0%,#EDEDED 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, #F7F7F7 0%,#EDEDED 100%); /* IE10+ */
+            background: linear-gradient(top, #F7F7F7 0%,#EDEDED 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F7F7F7', endColorstr='#EDEDED',GradientType=0 ); /* IE6-9 */
+        }
+        
+        .navigation li:hover, navigation li.current
+        {
+            box-shadow: 0 1px rgba(255,255,255,0.2) inset;
+            -webkit-box-shadow: 0 1px rgba(255,255,255,0.2) inset;
+            border-color: #f39c12 !important;
+            background: #f39c12; /* Old browsers */
+            background: -moz-linear-gradient(top, #f39c12 0%, #f39c12 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f39c12), color-stop(100%,#f39c12)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, #f39c12 0%,#f39c12 100%); /*Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, #f39c12 0%,#f39c12 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, #f39c12 0%,#f39c12 100%); /* IE10+ */
+            background: linear-gradient(top, #f39c12 0%,#f39c12 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f39c12', endColorstr='#f39c12',GradientType=0 ); /* IE6-9 */
+        }
+        .navigation a
+        {
+            display: block;
+            padding: 10px 10px;
+            text-decoration: none;
+        }
+        .navigation a.active
+        {
+            box-shadow: 0 1px rgba(255,255,255,0.2) inset;
+            -webkit-box-shadow: 0 1px rgba(255,255,255,0.2) inset;
+            border-color: #262626 !important;
+            background: #4D4D4D; /* Old browsers */
+            background: -moz-linear-gradient(top, #4D4D4D 0%, #262626 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4D4D4D), color-stop(100%,#262626)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, #4D4D4D 0%,#262626 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, #4D4D4D 0%,#262626 100%); /* IE10+ */
+            background: linear-gradient(top, #4D4D4D 0%,#262626 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4D4D4D', endColorstr='#262626',GradientType=0 ); /* IE6-9 */
+            color: #fff;
+        }
+        
+        .navigation a:hover, #navigation li.current a
+        {
+            color: #FFF;
+            text-shadow: 0 1px #000;
+        }
+        
+        .navigation li:first-child
+        {
+            border-left-color: #BABABA;
+            border-radius: 0px 0 0 0px;
+        }
+        
+        .navigation li:last-child
+        {
+            border-radius: 0 0px 0px 0;
+        }
+         label
+        {
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            text-transform: capitalize !important;
+            color: #404040 !important;
+            line-height: 1.8 !important;
+        }
+        btneditgrid
+        {
+            background: #f44336 !important;
+            border-radius: 100% !important;
+            padding: 0px !important;
+            height: 30px !important;
+            width: 30px !important;
+            color: #ffffff !important;
+            border-color: #f44336 !important;
+        }
+        .cal
+        {
+            cursor: pointer !important;
+            border-color: lightgrey !important;
+            background-color: white !important;
+            color: black !important;
+            border-radius: 0px !important;
+        }
+        .editcls
+        {
+            background: #00a65a !important;
+            border-radius: 100% !important;
+            padding: 0px !important;
+            height: 30px !important;
+            width: 30px !important;
+            color: #ffffff !important;
+            border-color: #00a65a !important;
+        }
+        .apprvcls
+        {
+            background: dodgerblue !important;
+            border-radius: 100% !important;
+            padding: 0px !important;
+            height: 30px !important;
+            width: 30px !important;
+            color: #ffffff !important;
+            border-color: dodgerblue !important;
+        }
+        .printcls
+        {
+            border-radius: 100% !important;
+            padding: 0px !important;
+            height: 30px !important;
+            width: 30px !important;
+        }
+        .aspbutton
+        {
+            cursor: pointer;
+            border-color: #3c8dbc;
+            background-color: #3c8dbc;
+            border-radius: 4px;
+            color: white;
+            position: relative;
+            display: table;
+            border-collapse: separate;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+       
+    </style>
+    <meta charset="utf-8">
+    <title>Plant ERP</title>
+    <link rel="icon" href="Images/vyshnavilogo.PNG" type="image/x-icon" title="Vyshnavi" />
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <%-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">--%>
+    <script src="plugins/morris/morris.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="dist/css/AdminLTE.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" type="text/css" href="dist/css/AdminLTE.css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="plugins/morris/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <script type="text/javascript" src="JSF/jquery.min.js"></script>
+    <script src="JSF/jquery-ui.js" type="text/javascript"></script>
+    <script src="JSF/jquery.blockUI.js" type="text/javascript"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <script src="JSF/jquery.blockUI.js" type="text/javascript"></script>
+    <link href="css/custom.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="hold-transition sidebar-mini skin-green-light">
+
+    <script type="text/javascript">
+        var sessionTimeOutValue = '<%= Session.Timeout %>';
+        function CloseWindow() {
+            alert('closing');
+            window.close();
+        }
+
+        $(function () {
+            // querystring  
+            var branchid = '<%=Session["Branch_ID"] %>';
+            //end query string
+            $('#lidashboard').css('display', 'block');
+            $('#lidashboard').addClass("treeview active");
+            $(document).ready(function () {
+                $('ul li a').click(function () {
+                    $('li a').removeClass("active");
+                    $(this).addClass("active");
+                });
+            });
+            $(".navigation li a").click(function (e) {
+                e.preventDefault();
+                $(this).parent().siblings().find('a').removeClass("active");
+                $(this).addClass("active"); //Add "active" class to selected tab  
+            });
+            $('#lilabb').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#liGheeSection_wyra').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#liprocessingReort').css('display', 'none');
+                $('#lipackingreport').css('display', 'none');
+                $('#lilab').css('display', 'block');
+                $('#lilab').addClass("treeview active");
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#libutter').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#liGheeSection_wyra').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#liprocessingReort').css('display', 'none');
+                $('#lipackingreport').css('display', 'none');
+                $('#lilab').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'block');
+                $('#libuttersection').addClass("treeview active");
+                $('#liapprovemodule').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#lihdashboard').click(function () {
+                $('#lidashboard').css('display', 'block');
+                $('#lidashboard').addClass("treeview active");
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#liGheeSection_wyra').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#liprocessingReort').css('display', 'none');
+                $('#lipackingreport').css('display', 'none');
+                $('#lilab').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#lihmaster').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'block');
+                $('#limaster').addClass("treeview active");
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#liGheeSection_wyra').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#liprocessingReort').css('display', 'none');
+                $('#lipackingreport').css('display', 'none');
+                $('#lilab').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#lihoperation').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'block');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#liGheeSection_wyra').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#liop').addClass("treeview active");
+                $('#liprocessingReort').css('display', 'none');
+                $('#lipackingreport').css('display', 'none');
+                $('#lilab').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#lihprocessing').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'block');
+                $('#ligheesection').css('display', 'none');
+                $('#liGheeSection_wyra').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#liprocessing').addClass("treeview active");
+                $('#liprocessingReort').css('display', 'block');
+                $('#liprocessingReort').addClass("treeview active");
+                $('#lipackingreport').css('display', 'none');
+                $('#lilab').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#lihpackingsection').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'block');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#liGheeSection_wyra').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#liSections').addClass("treeview active");
+                $('#liprocessingReort').css('display', 'none');
+                $('#lipackingreport').css('display', 'block');
+                $('#lipackingreport').addClass("treeview active");
+                $('#lilab').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#lihgheesection').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'block');
+                $('#ligheesection_wyra').css('display', 'block');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#ligheesection').addClass("treeview active");
+                $('#liprocessingReort').css('display', 'none');
+                $('#lilab').css('display', 'none');
+                $('#lipackingreport').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+                if (branchid == "26" || branchid == "115") {
+                    $('#ligheesection').css('display', 'none');
+                }
+                else {
+                    $('#ligheesection').css('display', 'block ');
+                    $('#lihgheesection').css('display', 'block');
+                }
+            });
+            $('#lihcurdsection').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#licurdsection').css('display', 'block');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#licurdsection').addClass("treeview active");
+                $('#liprocessingReort').css('display', 'none');
+                $('#lilab').css('display', 'none');
+                $('#lipackingreport').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#lihcashdetails').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'block');
+                $('#licashdetails').addClass("treeview active");
+                $('#liprocessingReort').css('display', 'none');
+                $('#lilab').css('display', 'none');
+                $('#lipackingreport').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#lihreports').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'block');
+                $('#liReport').addClass("treeview active");
+                $('#liprocessingReort').css('display', 'none');
+                $('#lilab').css('display', 'none');
+                $('#lipackingreport').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#lihprocessingreports').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#liprocessingReort').addClass("treeview active");
+                $('#lilab').css('display', 'none');
+                $('#lipackingreport').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            $('#lihpackingreports').click(function () {
+                $('#lihdashboard').addClass("");
+                $('#lidashboard').css('display', 'none');
+                $('#limaster').css('display', 'none');
+                $('#liSections').css('display', 'none');
+                $('#liop').css('display', 'none');
+                $('#liprocessing').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#licurdsection').css('display', 'none');
+                $('#licashdetails').css('display', 'none');
+                $('#liReport').css('display', 'none');
+                $('#liprocessingReort').css('display', 'none');
+                $('#lipackingreport').css('display', 'block');
+                $('#lilab').css('display', 'none');
+                $('#lipackingreport').addClass("treeview active");
+                $('#lichartreport').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#limilkoscreen').css('display', 'none');
+                $('#liweighbridge').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#liapprovemodule').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+            });
+            jQuery(document).ready(function () {
+                //var url = document.URL;
+                var pageURL = window.location.href;
+                var currentPage = pageURL.substr(pageURL.lastIndexOf("/") + 1, pageURL.length - pageURL.lastIndexOf("/") - 1);
+                $('.sidebar > ul > li > a[href$="' + currentPage + '"]').each(function () {
+                    $(this).parent().addClass('active');
+                });
+                $('.sidebar > ul > li > ul.treeview-menu > li > a[href$="' + currentPage + '"]').each(function () {
+                    $(this).parent().attr('class', 'active');
+                    $(this).parent().parent().parent().attr('class', 'active');
+                });
+                $('[name="parent_li"]').each(function () {
+                    if ($(this).find('ul').children().length == 0) {
+                        $(this).css('display', 'none');
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            var branchid = '<%=Session["Branch_ID"] %>';
+            var BranchType = '<%=Session["BranchType"] %>';
+            var leveltype = '<%=Session["leveltype"] %>';
+
+            if (branchid == "22") {
+                $('#li_sapkuppamrep').css('display', 'block');
+            }
+            else {
+                $('#li_sapkuppamrep').css('display', 'none');
+            }
+            if (branchid == "26" || branchid == "115") {
+                $('#listd_wyra').css('display', 'block');
+                $('#li_stdrpt').css('display', 'none');
+                $('#liGheeSection').css('display', 'none');
+                $('#liGheeSection_wyra').css('display', 'none');
+                $('#ligheesection').css('display', 'none');
+                $('#lihgheesection').css('display', 'none');
+            }
+            else {
+                $('#listd_wyra').css('display', 'none');
+                $('#li_stdrpt').css('display', 'block');
+                $('#liGheeSection').css('display', 'block');
+                $('#liGheeSection_wyra').css('display', 'none');
+            }
+            if (BranchType == "CC") {
+                $('libuttersection').css('display', 'none');
+                $('liqualitytesting').css('display', 'none');
+                $('licurdcildroom').css('display', 'none');
+                $('lilogininfo').css('display', 'none');
+                $('#litankerdiffrpt').css('display', 'none');
+                $('#libv').css('display', 'none');
+                $('#lidash').css('display', 'none');
+                $('#limaster').css('display', 'none ');
+                $('#liinwarddc').css('display', 'none ');
+                $('#liinward').css('display', 'none ');
+                $('#lioutward').css('display', 'none ');
+                $('#liinwardsilo').css('display', 'none ');
+                $('#lifatsnfchange').css('display', 'none ');
+                $('#lioutwardsilo').css('display', 'none ');
+                $('#lidespatch_entry').css('display', 'block ');
+                // $('#liout_despatch').css('display', 'none ');
+                $('#liBranchwiseReport').css('display', 'none ');
+                $('#liOutward_dc_report').css('display', 'none ');
+                $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                $('#lirpttankerinward').css('display', 'none ');
+                $('#lirpttankeroutward').css('display', 'none ');
+                $('#lirptinwarddespatch').css('display', 'none ');
+                $('#lirpt_vendor').css('display', 'none ');
+                $('#lirptdespatch').css('display', 'block ');
+                $('#lirptinvoice').css('display', 'block ');
+                $('#lishiftclosing').css('display', 'none ');
+                $('#liVendortsratechange').css('display', 'none ');
+                $('#liApprovalVendortsratechange').css('display', 'none ');
+                $('#lidashboard').css('display', 'none ');
+                $('#limaster').css('display', 'none ');
+                $('#lisilomonitor').css('display', 'none ');
+                $('#liintrasilotransaction').css('display', 'none ');
+                $('#liprocessingReort').css('display', 'none ');
+                $('#liliApprovalVendortsratechange').css('display', 'none ');
+                $('#liliVendortsratechange').css('display', 'none ');
+                $('#liprocessingReort').css('display', 'none ');
+                $('#lilisilomonitor').css('display', 'none ');
+                $('#liIntrasiloTransaction').css('display', 'none ');
+                $('#lishiftwise_closing').css('display', 'none ');
+                $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                $('#lishiftwise_closing').css('display', 'none ');
+                $('#liBatchentry').css('display', 'none ');
+                $('#liReturn_milk').css('display', 'none ');
+                $('#liTankerInwardApproval').css('display', 'none ');
+                $('#liDirectSale').css('display', 'none ');
+                $('#liDirectSalesReport').css('display', 'none ');
+                $('#liweighbridge').css('display', 'none ');
+                $('#liCollections').css('display', 'none ');
+                $('#licashdetails').css('display', 'none ');
+                $('#liapprovalsms').css('display', 'none ');
+                $('#liAcknowledge').css('display', 'block ');
+                $('#liSections').css('display', 'none ');
+                $('#licuttingfilm').css('display', 'none ');
+                $('#lipackingreport').css('display', 'none ');
+                $('#lipackindashboard').css('display', 'none ');
+                $('#ligheesection').css('display', 'none ');
+                $('#licurdsection').css('display', 'none ');
+                $('#limilkoscreen').css('display', 'none ');
+                $('#liprocessing').css('display', 'none ');
+                $('#liageofmilk').css('display', 'block ');
+                $('#lihdashboard').css('display', 'none');
+                $('#lihmaster').css('display', 'none');
+                $('#lihoperation').css('display', 'block');
+                $('#lihprocessing').css('display', 'none');
+                $('#lihpacking').css('display', 'none');
+                $('#lihgheesection').css('display', 'none');
+                $('#lihcurdsection').css('display', 'none');
+                $('#lihcashdetails').css('display', 'none');
+                $('#lihreports').css('display', 'block');
+                $('#lihprocessingreports').css('display', 'none');
+                $('#lihpackingreports').css('display', 'none');
+                $('#liTankerreports').css('display', 'none');
+                $('#liother').css('display', 'none');
+                $('#liageofmilk').css('display', 'none');
+                $('#libatchwisequalitytesting').css('display', 'none');
+                $('#lisilowisequalitytesting').css('display', 'none');
+                $('#litallyreports').css('display', 'none');
+                $('#lichartreport').css('display', 'none');
+                $('#lihpackingsection').css('display', 'none');
+                $('#lidirectpurchase').css('display', 'none ');
+                $('#liqualitytesting').css('display', 'none ');
+                $('#lilogininfo').css('display', 'none ');
+                $('#licurdcildroom').css('display', 'none ');
+                $('#liapprovemodule').css('display', 'none');
+                $('#lilab').css('display', 'none');
+                $('#lilabb').css('display', 'none');
+                $('#libuttersection').css('display', 'none');
+                $('#libutter').css('display', 'none');
+                $('#licosting').css('display', 'none');
+                $('#lisapreports').css('display', 'none');
+                $('#liplantdcrpt').css('display', 'none');
+            }
+            if (BranchType == "Plant") {
+                if (leveltype == "Processing") {
+                    $('#liinwardsilo').css('display', 'none');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'block ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'block ');
+                    $('#liReturn_milk').css('display', 'block ');
+                    $('liprocessingReport').css('display', 'block');
+                    $('li8').css('display', 'block');
+                    $('li9').css('display', 'block');
+                    $('li10').css('display', 'block');
+                    $('li11').css('display', 'block');
+                    $('li12').css('display', 'block');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#lirpt_total_dc').css('display', 'none');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    // $('#liout_despatch').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('lireports').css('display', 'none');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'block ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#lidashboard').css('display', 'block ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#lihdashboard').css('display', 'block');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'block');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'block');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                }
+                if (leveltype == "Operations") {
+                    $('#lirpttankerinward').css('display', 'block ');
+                    $('#lirpttankeroutward').css('display', 'block ');
+                    $('#lirptinwarddespatch').css('display', 'block ');
+                    $('#lirpt_vendor').css('display', 'block ');
+                    $('#lirptdespatch').css('display', 'block ');
+                    $('#lirptinvoice').css('display', 'block ');
+                    $('#liprocessingReort').css('display', 'block ');
+                    $('#liprocessingReort').css('display', 'block ');
+                    $('#liBranchwiseReport').css('display', 'block ');
+                    $('#liOutward_dc_report').css('display', 'block ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    //  $('#liout_despatch').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#lihdashboard').css('display', 'block');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'block');
+                    $('#lihprocessing').css('display', 'block');
+                    $('#lihpacking').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'block');
+                    $('#lihprocessingreports').css('display', 'block');
+                    $('#lihpackingreports').css('display', 'block');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                }
+                if (leveltype == "curdblock") {
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liReport').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    $('#liop').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpt_total_dc').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'block ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#liop').css('display', 'none ');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpacking').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'block');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'none');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lilabb').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#libutter').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (leveltype == "lab") {
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liReport').css('display', 'block ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinward').css('display', 'block ');
+                    $('#lioutward').css('display', 'block ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    //$('#liout_despatch').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'block ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'block ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpt_total_dc').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'block ');
+                    $('libuttersection').css('display', 'none');
+                    $('#liother').css('display', 'none ');
+                    $('#libv').css('display', 'none ');
+                    $('#lidirectpurchase').css('display', 'none ');
+                    $('#livariation').css('display', 'none ');
+                    $('#litankerdiffrpt').css('display', 'none ');
+                    $('#lidccompare').css('display', 'none ');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'block');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpacking').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'block');
+                    $('#lihprocessingreports').css('display', 'none');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#lilab').css('display', 'block');
+                    $('#litallyreports').css('display', 'none');
+                    $('#libutter').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (leveltype == "weighing") {
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    //  $('#liout_despatch').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#liReport').css('display', 'none ');
+                    $('#liSilo_dashBoard').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'block ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpacking').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'none');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (leveltype == "packing") {
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    //  $('#liout_despatch').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#liReport').css('display', 'none ');
+                    $('#liSilo_dashBoard').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'block ');
+                    $('#lipackindashboard').css('display', 'block ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('libuttersection').css('display', 'none');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpacking').css('display', 'block');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'none');
+                    $('#lihpackingreports').css('display', 'block');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#lilabb').css('display', 'none');
+                    $('#libutter').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (leveltype == "Butter") {
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    $('#liop').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#liReport').css('display', 'none ');
+                    $('#liSilo_dashBoard').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpacking').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'none');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#libuttersection').css('display', 'block');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lilabb').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (leveltype == "Reports") {
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    // $('#liout_despatch').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#liReport').css('display', 'block ');
+                    $('#liSilo_dashBoard').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'block ');
+                    $('#liAcknowledge').css('display', 'block ');
+                    $('#lirpttankeroutward').css('display', 'block ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpt_total_dc').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'block ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#liop').css('display', 'none ');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'none');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#lilabb').css('display', 'none');
+                    $('#libutter').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                }
+                if (leveltype == "dailyreport") {
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    //  $('#liout_despatch').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'block ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#liReport').css('display', 'none ');
+                    $('#liSilo_dashBoard').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#lidailyreport').css('display', 'block ');
+                    $('li8').css('display', 'none');
+                    $('li9').css('display', 'none');
+                    $('li10').css('display', 'none');
+                    $('li11').css('display', 'none');
+                    $('li12').css('display', 'none');
+                    $('li13').css('display', 'none');
+                    $('libatchentry').css('display', 'none');
+                    $('lisilorpt').css('display', 'none');
+                    $('lisiloclosing').css('display', 'none');
+                    $('libatchwiseclosing').css('display', 'none');
+                    $('licipcleaning').css('display', 'none');
+                    $('lipower').css('display', 'none');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpt_total_dc').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#liop').css('display', 'none ');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'block');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#lilabb').css('display', 'none');
+                    $('#libutter').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                }
+                if (leveltype == "Data") {
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    //  $('#liout_despatch').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#liReport').css('display', 'block ');
+                    $('#liSilo_dashBoard').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'block ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpt_total_dc').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#liop').css('display', 'none ');
+                    $('#lilab').css('display', 'none');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'none');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#lilabb').css('display', 'none');
+                    $('#libutter').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                }
+
+                if (leveltype == "Security") {
+                    $('libuttersection').css('display', 'none');
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    // $('#liout_despatch').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'block ');
+                    $('#lidashboard').css('display', 'block ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'block ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#liReport').css('display', 'none ');
+                    $('#liSilo_dashBoard').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#lilab').css('display', 'none');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'none');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lilabb').css('display', 'none');
+                    $('#libutter').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (leveltype == "ghee") {
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    //  $('#liout_despatch').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#liReport').css('display', 'none ');
+                    $('#liSilo_dashBoard').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'none ');
+                    if (branchid == "26" || branchid == "115") {
+                        $('#ligheesection_wyra').css('display', 'block ');
+                        $('#lihgheesection').css('display', 'none');
+                    }
+                    else {
+                        $('#ligheesection').css('display', 'block ');
+                        $('#lihgheesection').css('display', 'block');
+                    }
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#liop').css('display', 'none');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpackingsection').css('display', 'none');
+                   
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'none');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#lilabb').css('display', 'none');
+                    $('#libutter').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (leveltype == "suboperations") {
+                    $('#liinward').css('display', 'none ');
+                    $('#lioutward').css('display', 'none ');
+                    $('#lidash').css('display', 'none');
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liinwardsilo').css('display', 'none ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'none ');
+                    $('#liBranchwiseReport').css('display', 'none ');
+                    $('#liOutward_dc_report').css('display', 'none ');
+                    $('#lirpttankerinward').css('display', 'none ');
+                    $('#lirpttankeroutward').css('display', 'none ');
+                    $('#lirptinwarddespatch').css('display', 'none ');
+                    $('#lirpt_vendor').css('display', 'none ');
+                    $('#lirptdespatch').css('display', 'none ');
+                    $('#lirptinvoice').css('display', 'none ');
+                    $('#lishiftclosing').css('display', 'none ');
+                    $('#liVendortsratechange').css('display', 'none ');
+                    $('#liprocessingReort').css('display', 'block ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liTankerInwardApproval').css('display', 'none ');
+                    $('#liDirectSale').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'none ');
+                    $('#liweighbridge').css('display', 'none ');
+                    $('#liCollections').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#liReport').css('display', 'none ');
+                    $('#liSilo_dashBoard').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'block ');
+                    if (branchid == "26" || branchid == "115") {
+                        $('#ligheesection_wyra').css('display', 'block ');
+                    }
+                    else {
+                        $('#ligheesection').css('display', 'block ');
+                    }
+                    $('#licurdsection').css('display', 'none ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#liop').css('display', 'none');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'block');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lihgheesection').css('display', 'block');
+                    $('#lihcurdsection').css('display', 'none');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'block');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#libuttersection').css('display', 'block');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#lilabb').css('display', 'none');
+                    $('#libutter').css('display', 'block');
+                    $('#litallyreports').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (leveltype == "curdandlab") {
+                    $('#lidashboard').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#licashdetails').css('display', 'none ');
+                    $('#liapprovalsms').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'none ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#lilisilomonitor').css('display', 'none ');
+                    $('#liBatchentry').css('display', 'none ');
+                    $('#liIntrasiloTransaction').css('display', 'none ');
+                    $('#lishiftwise_closing').css('display', 'none ');
+                    $('#liDepartmentwiseqtydetails').css('display', 'none ');
+                    $('#liReturn_milk').css('display', 'none ');
+                    $('#liReport').css('display', 'block ');
+                    $('#liSilo_dashBoard').css('display', 'none ');
+                    $('#liAcknowledge').css('display', 'none ');
+                    $('#liSections').css('display', 'none ');
+                    $('#licuttingfilm').css('display', 'none ');
+                    $('#lipackingreport').css('display', 'none ');
+                    $('#lipackindashboard').css('display', 'none ');
+                    $('#liprocessing').css('display', 'none ');
+                    $('#ligheesection').css('display', 'none ');
+                    $('#licurdsection').css('display', 'block ');
+                    $('#limilkoscreen').css('display', 'none ');
+                    $('#liop').css('display', 'none');
+                    $('#lihdashboard').css('display', 'none');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'none');
+                    $('#lihprocessing').css('display', 'none');
+                    $('#lihpackingsection').css('display', 'none');
+                    $('#lihgheesection').css('display', 'none');
+                    $('#lihcurdsection').css('display', 'block');
+                    $('#lihcashdetails').css('display', 'none');
+                    $('#lihreports').css('display', 'none');
+                    $('#lihprocessingreports').css('display', 'none');
+                    $('#lihpackingreports').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lilab').css('display', 'block');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#lilabb').css('display', 'block');
+                    $('#libutter').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                else {
+                    if (leveltype == "Admin") {
+                        if (branchid == "26" || branchid == "115") {
+                            $('#lidash').css('display', 'none');
+                            $('#litransist').css('display', 'none');
+                        }
+                        else {
+                            $('#lidash').css('display', 'block');
+                            $('#litransist').css('display', 'block');
+                        }
+                        $('#limaster').css('display', 'block ');
+                        $('#liinwarddc').css('display', 'block ');
+                        $('#liinward').css('display', 'block ');
+                        $('#lioutward').css('display', 'block ');
+                        $('#liinwardsilo').css('display', 'block ');
+                        $('#lifatsnfchange').css('display', 'block ');
+                        $('#lioutwardsilo').css('display', 'none ');
+                        $('#lidespatch_entry').css('display', 'none ');
+                        $('#liVehicleWiseSummeryReport').css('display', 'block ');
+                        $('#liBranchwiseReport').css('display', 'block ');
+                        $('#liOutward_dc_report').css('display', 'block ');
+                        $('#lirpttankerinward').css('display', 'block ');
+                        $('#lirpttankeroutward').css('display', 'block ');
+                        $('#lirptinwarddespatch').css('display', 'block ');
+                        $('#lirpt_vendor').css('display', 'block ');
+                        $('#lirptdespatch').css('display', 'block ');
+                        $('#lirptinvoice').css('display', 'block ');
+                        $('#lishiftclosing').css('display', 'block ');
+                        $('#liVendortsratechange').css('display', 'block ');
+                        $('#liprocessingReort').css('display', 'block ');
+                        $('#liApprovalVendortsratechange').css('display', 'none ');
+                        $('#liDirectSalesReport').css('display', 'block ');
+                        $('#liTankerInwardApproval').css('display', 'block ');
+                        $('#liweighbridge').css('display', 'block ');
+                        $('#liCollections').css('display', 'block ');
+                        $('#licashdetails').css('display', 'block ');
+                        $('#liapprovalsms').css('display', 'block ');
+                        $('#liAcknowledge').css('display', 'block ');
+                        $('#liSections').css('display', 'block ');
+                        $('#lipackindashboard').css('display', 'block ');
+                        if (branchid == "26" || branchid == "115") {
+                            $('#ligheesection_wyra').css('display', 'block ');
+                        }
+                        else {
+                            $('#ligheesection').css('display', 'block ');
+                        }
+                        $('#licurdsection').css('display', 'block ');
+                        $('#liApprovalVendortsratechange').css('display', 'block');
+                        $('#limilkoscreen').css('display', 'block ');
+                        $('libuttersection').css('display', 'block');
+                        $('#lihdashboard').css('display', 'block');
+                        $('#lihmaster').css('display', 'block');
+                        $('#lihoperation').css('display', 'block');
+                        $('#lihprocessing').css('display', 'block');
+                        $('#lihpackingsection').css('display', 'block');
+                        $('#lihgheesection').css('display', 'block');
+                        $('#lihcurdsection').css('display', 'block');
+                        $('#lihcashdetails').css('display', 'block');
+                        $('#lihreports').css('display', 'block');
+                        $('#lihprocessingreports').css('display', 'block');
+                        $('#lihpackingreports').css('display', 'block');
+                        $('#liTankerreports').css('display', 'block');
+                        $('#liapprovemodule').css('display', 'block');
+                        $('#licosting').css('display', 'block');
+                    }
+                }
+                if (leveltype == "AllOperations") {
+                    if (branchid == "26" || branchid == "115") {
+                        $('#lidash').css('display', 'none');
+                        $('#litransist').css('display', 'none');
+                        $('#liinward').css('display', 'block ');
+                    }
+                    else {
+                        $('#lidash').css('display', 'block');
+                        $('#litransist').css('display', 'block');
+                        $('#liinward').css('display', 'none ');
+                    }
+                    $('#limaster').css('display', 'none ');
+                    $('#liinwarddc').css('display', 'block ');
+                    $('#liinward').css('display', 'block ');
+                    $('#lioutward').css('display', 'block ');
+                    $('#liinwardsilo').css('display', 'block ');
+                    $('#lifatsnfchange').css('display', 'none ');
+                    $('#lioutwardsilo').css('display', 'none ');
+                    $('#lidespatch_entry').css('display', 'none ');
+                    $('#liVehicleWiseSummeryReport').css('display', 'block ');
+                    $('#liBranchwiseReport').css('display', 'block ');
+                    $('#liOutward_dc_report').css('display', 'block ');
+                    $('#lirpttankerinward').css('display', 'block ');
+                    $('#lirpttankeroutward').css('display', 'block ');
+                    $('#lirptinwarddespatch').css('display', 'block ');
+                    $('#lirpt_vendor').css('display', 'block ');
+                    $('#lirptdespatch').css('display', 'block ');
+                    $('#lirptinvoice').css('display', 'block ');
+                    $('#lishiftclosing').css('display', 'block ');
+                    $('#liVendortsratechange').css('display', 'block ');
+                    $('#liprocessingReort').css('display', 'block ');
+                    $('#liApprovalVendortsratechange').css('display', 'none ');
+                    $('#liDirectSalesReport').css('display', 'block ');
+                    $('#liTankerInwardApproval').css('display', 'block ');
+                    $('#liweighbridge').css('display', 'block ');
+                    $('#liCollections').css('display', 'block ');
+                    $('#licashdetails').css('display', 'block ');
+                    $('#liapprovalsms').css('display', 'block ');
+                    $('#liAcknowledge').css('display', 'block ');
+                    $('#liSections').css('display', 'block ');
+                    $('#lipackindashboard').css('display', 'block ');
+                    if (branchid == "26" || branchid == "115") {
+                        $('#ligheesection_wyra').css('display', 'block ');
+                    }
+                    else {
+                        $('#ligheesection').css('display', 'block ');
+                    }
+                    $('#licurdsection').css('display', 'block ');
+                    $('#liApprovalVendortsratechange').css('display', 'block');
+                    $('#limilkoscreen').css('display', 'block ');
+                    $('libuttersection').css('display', 'block');
+                    $('#lihdashboard').css('display', 'block');
+                    $('#lihmaster').css('display', 'none');
+                    $('#lihoperation').css('display', 'block');
+                    $('#lihprocessing').css('display', 'block');
+                    $('#lihpackingsection').css('display', 'block');
+                    $('#lihgheesection').css('display', 'block');
+                    $('#lihcurdsection').css('display', 'block');
+                    $('#lihcashdetails').css('display', 'block');
+                    $('#lihreports').css('display', 'block');
+                    $('#lihprocessingreports').css('display', 'block');
+                    $('#lihpackingreports').css('display', 'block');
+                    $('#liTankerreports').css('display', 'block');
+                    $('#liapprovemodule').css('display', 'block');
+                    $('#licosting').css('display', 'block');
+                }
+                var str = '<%= Request.QueryString["Dash Board"] %>';
+                if (str == "chart") {
+                    $('#mainmenu').css('width', 40);
+                    $('#mainmenu').css('z-index: 850', 50);
+                    $('.content-wrapper').css('margin-left', 50);
+                    $('#lidashboard').css('display', 'block');
+                    $('#lidashboard').addClass("treeview active");
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#lihdashboard').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+
+                }
+                if (str == "DashBoard") {
+                    $('#lidashboard').css('display', 'block');
+                    $('#lidashboard').addClass("treeview active");
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#lihdashboard').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    // $('#liapproval').css('display', 'none');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (str == "Masters") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'block');
+                    $('#limaster').addClass("treeview active");
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#lihmaster').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (str == "Approve") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'block');
+                    $('#liapprovemodule').addClass("treeview active");
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (str == "buttersection") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'block');
+                    $('#libuttersection').addClass("treeview active");
+                    $('#liTankerreports').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#libutter').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (str == "labsection") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lilab').css('display', 'block');
+                    $('#lilab').addClass("treeview active");
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lilabb').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (str == "operations") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'block');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liop').addClass("treeview active");
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lihoperation').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (str == "ProcessingSections") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'block');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liprocessing').addClass("treeview active");
+                    $('#liprocessingReort').css('display', 'block');
+                    $('#liprocessingReort').addClass("treeview active");
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lihprocessing').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+
+                if (str == "Packingsection") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'block');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liSections').addClass("treeview active");
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lipackingreport').css('display', 'block');
+                    $('#lilab').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lihpackingsection').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+
+                }
+
+                if (str == "GheeSection") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    if (branchid == "26" || branchid == "115") {
+                        $('#ligheesection_wyra').css('display', 'block ');
+                    }
+                    else {
+                        $('#ligheesection').css('display', 'block ');
+                    }
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#ligheesection').addClass("treeview active");
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lihgheesection').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+
+                if (str == "CurdSection") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'block');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#licurdsection').addClass("treeview active");
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lihcurdsection').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+
+                if (str == "CashDetails") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'block');
+                    $('#licashdetails').addClass("treeview active");
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lihcashdetails').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (str == "Reports") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'block');
+                    $('#liReport').addClass("treeview active");
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lilab').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lihreports').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+
+                if (str == "ProcReports") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liprocessingReort').css('display', 'block');
+                    $('#liprocessingReort').addClass("treeview active");
+                    $('#lilab').css('display', 'none');
+                    $('#lipackingreport').css('display', 'none');
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lihprocessingreports').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+                if (str == "PkgReports") {
+                    $('#lidashboard').css('display', 'none');
+                    $('#limaster').css('display', 'none');
+                    $('#liSections').css('display', 'none');
+                    $('#liop').css('display', 'none');
+                    $('#liprocessing').css('display', 'none');
+                    $('#ligheesection').css('display', 'none');
+                    $('#licurdsection').css('display', 'none');
+                    $('#licashdetails').css('display', 'none');
+                    $('#liReport').css('display', 'none');
+                    $('#liprocessingReort').css('display', 'none');
+                    $('#lipackingreport').css('display', 'block');
+                    $('#lilab').css('display', 'none');
+                    $('#lipackingreport').addClass("treeview active");
+                    $('#lichartreport').css('display', 'none');
+                    $('#litallyreports').css('display', 'none');
+                    $('#limilkoscreen').css('display', 'none');
+                    $('#liweighbridge').css('display', 'none');
+                    $('#libuttersection').css('display', 'none');
+                    $('#liapprovemodule').css('display', 'none');
+                    $('#liTankerreports').css('display', 'none');
+                    $('#lihpackingreports').css('background', '-webkit-linear-gradient(top, #4D4D4D 0%,#262626 100%)');
+                    $('#licosting').css('display', 'none');
+                    $('#lisapreports').css('display', 'none');
+                }
+            }
+        });
+        $(function Pagelocation_search() {
+            //            $("#form_select").select2({ placeholder: 'Select page' });
+            //            var data = { 'op': 'form_selection' };
+            //            var s = function (msg) {
+            //                if (msg) {
+            //                    var form_select = document.getElementById('ddl_search');
+            //                    var length = form_select.options.length;
+            //                    form_select.options.length = null;
+            //                    var option = document.createElement('option');
+            //                    option.innerHTML = "Search page";
+            //                    form_select.appendChild(option);
+            //                    //                    for (var i = 0; i < msg.length; i++) {
+            //                    //                        var opt = document.createElement('option');
+            //                    //                        opt.innerHTML = msg[i].Pagename;
+            //                    //                        opt.value = msg[i].url;
+            //                    //                        form_select.appendChild(opt);
+            //                    //                    }
+
+            //                }
+            //            };
+            //            var e = function (x, h, e) { };
+            //            callHandler(data, s, e);
+        });
+        function ddl_search_change() {
+            var Pagelocation = document.getElementById("ddl_search").value;
+            document.location = Pagelocation;
+        }
+    </script>
+    <form id="Form1" runat="server">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="Dashboard.aspx" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>V</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Vyshnavi</b></span> </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><span class="sr-only">
+                    Toggle navigation</span> </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                            aria-expanded="true">
+                            <img src="images/profilepic.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs">
+                                <asp:Label ID="lblMessage" runat="server"></asp:Label></span> </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="images/profilepic.jpg" class="img-circle" alt="User Image">
+                                    <p>
+                                        <asp:Label ID="lblName" runat="server"></asp:Label>
+                                        -
+                                        <asp:Label ID="lblRole" runat="server"></asp:Label>
+                                        <small></small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="LogOut.aspx" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                                <li><a href="ChangePassWord.aspx" class="btn btn-default btn-flat">Change Password</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                        <li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside id="mainmenu" class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class='treeview'>
+                        <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="images/profilepic.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p><asp:Label ID="lblmyname" runat="server" Text="Label">User
+                            </asp:Label></p>
+                            <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
+                        </div>
+                         </div>
+                    </li>
+                    <li id="lidashboard" class="treeview"><a href="#"><i class="fa fa-dashboard"></i><span>
+                        Dashboard</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li class="lidash"><a href="Dashboard.aspx?Dash Board=DashBoard"><i class="fa fa-circle-o">
+                            </i>InTrasist DashBoard</a></li>
+                            <li id="li23" class="lidash"><a href="milkagedashboard.aspx?Dash Board=DashBoard"><i
+                                class="fa fa-circle-o"></i>CC Wise Milk Dashboard </a></li>
+                            <li id="lichart" class="lidash"><a href="chartdashboard.aspx?Dash Board=DashBoard"><i
+                                class="fa fa-circle-o"></i>Chart Dashboard </a></li>
+                            <li id="litransist" class="lidash"><a href="TransistMilkDetails.aspx?Dash Board=DashBoard">
+                                <i class="fa fa-circle-o"></i>Transist Milk Dashboard </a></li>
+                           
+                        </ul>
+                    </li>
+                    <li id="limaster" class="treeview"><a href="#"><i class="fa fa-share"></i><span>Masters</span>
+                        <span class="label label-primary pull-right"></span></a>
+                        <ul class="treeview-menu">
+                            <li><a href="minimasters.aspx?Dash Board=Masters"><i class="fa fa-share"></i>General Masters</a></li>
+                            <li><a href="AddBranch.aspx?Dash Board=Masters"><i class="fa fa-share"></i>Branch</a></li>
+                            <li><a href="Vendor.aspx?Dash Board=Masters"><i class="fa fa-share"></i>Vendors</a></li>
+                            <li><a href="ProductMaster.aspx?Dash Board=Masters"><i class="fa fa-share"></i>Product
+                                Master</a></li>
+                        </ul>
+                    </li>
+                    <li id="liop" class="treeview"><a href="#"><i class="fa fa-pie-chart"></i><span>Operations</span>
+                        <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="lidespatch_entry"><a href="Despatch_Entry.aspx?Dash Board=operations"><i
+                                class="fa fa-circle-o"></i>Despatch Entry</a></li>
+                            <li id="liDirectSale"><a href="DirectSale.aspx?Dash Board=operations"><i class="fa fa-circle-o">
+                            </i>Direct Sale</a></li>
+                            <li id="liother"><a href="otherpartydirectsales.aspx?Dash Board=operations"><i class="fa fa-circle-o">
+                            </i>Other Party Direct Sale</a></li>
+                            <li id="liapprovalsms"><a href="approvalsms.aspx?Dash Board=operations"><i class="fa fa-circle-o">
+                            </i>Approval SMS</a></li>
+                            <li id="liVendortsratechange"><a href="TS_RateChangeform.aspx?Dash Board=operations">
+                                <i class="fa fa-circle-o"></i>Vendor TS Rate Change</a></li>
+                            <li id="liApprovalVendortsratechange"><a href="Approval_Vendor_TSRate.aspx?Dash Board=operations">
+                                <i class="fa fa-circle-o"></i>Approval Vendor TS Rates</a></li>
+                            <li id="liinwarddc"><a href="Inward_dc_varify.aspx?Dash Board=operations"><i class="fa fa-circle-o">
+                            </i>Inward DC Varify</a></li>
+                             <li id="liout_despatch"><a href="transportvalue.aspx?Dash Board=operations"><i class="fa fa-circle-o">
+                             </i>Transport Entry</a></li>
+
+                             <li id="li55"><a href="auditqltytest.aspx?Dash Board=operations"><i class="fa fa-circle-o">
+                             </i>Audit Quality Testing Entry</a></li>
+                        </ul>
+                    </li>
+                    <li id="lilab" class="treeview"><a href="#"><i class="fa fa-pie-chart"></i><span>Lab</span>
+                        <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="liinward"><a href="Inward.aspx?Dash Board=labsection"><i class="fa fa-circle-o">
+                            </i>Tanker Inward</a></li>
+                            <li id="lioutward"><a href="Outward.aspx?Dash Board=labsection"><i class="fa fa-circle-o">
+                            </i>Tanker Outward</a></li>
+                            <li id="li54"><a href="samplesqltytest.aspx?Dash Board=labsection"><i class="fa fa-circle-o">
+                            </i>Sample No Wise Quality Testing</a></li>
+                            <li id="li37"><a href="qualitytestingdetails.aspx?Dash Board=labsection"><i class="fa fa-circle-o">
+                            </i>Quality Testings</a></li>
+                            <li id="li58"><a href="curdcoldroom.aspx?Dash Board=labsection"><i class="fa fa-circle-o">
+                            </i>ColdRoom Temp Details </a></li>
+                            <li id="li43"><a href="Swabanalysis.aspx?Dash Board=labsection"><i class="fa fa-circle-o">
+                            </i>Micro Biology Details </a></li>
+                        </ul>
+                    </li>
+                    <li id="liprocessing" class="treeview"><a href="#"><i class="fa fa-hourglass-half"></i>
+                        <span>Processing Section</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="lilisilomonitor"><a href="SiloMonitor.aspx?Dash Board=ProcessingSections"><i
+                                class="fa fa-circle-o"></i>SILO Operations</a></li>
+                            <li id="liinwardsilo" style="display: none;"><a href="InwardSilo.aspx?Dash Board=ProcessingSections">
+                                <i class="fa fa-circle-o"></i>Inward Silo</a></li>
+                            <li id="liBatchentry"><a href="Batchentry.aspx?Dash Board=ProcessingSections"><i
+                                class="fa fa-circle-o"></i>Batch Preparation</a></li>
+                            <li id="liReturn_milk"><a href="returnmilkdetails.aspx?Dash Board=ProcessingSections"><i
+                                class="fa fa-circle-o"></i>Return Milk</a></li>
+                            <li id="li15"><a href="cipandsmpdetails.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>CIP and SMP Details </a></li>
+                            <li id="liclosing"><a href="closingdetails.aspx?Dash Board=ProcessingSections"><i
+                                class="fa fa-circle-o"></i>Closing Details</a></li>
+                            <li id="li62"><a href="silowiseclosing.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>Silo Wise Closing </a></li>
+                            <li id="li18"><a href="silowiseediting.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>Silo Closing Edit </a></li>
+                            <li id="li20"><a href="creamsaparation.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>Cream Saparation Details</a></li>
+                            <li id="lifatsnfchange"><a href="fatsnfchange.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>Despatch FAT and SNF Change</a></li>
+
+                             <li id="li38"><a href="productionplaning.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>Production Planing</a></li>
+
+                            <li id="li44"><a href="floedata.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>flow meter entry</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li id="liSections" class="treeview"><a href="#"><i class="fa fa-truck"></i><span>Packing
+                        Sections</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="liPackingsection"><a href="Packingsection.aspx?Dash Board=Packingsection"><i
+                                class="fa fa-circle-o"></i>Packing Entry</a></li>
+                            <li id="licoldSection"><a href="coldroomstock.aspx?Dash Board=Packingsection"><i
+                                class="fa fa-circle-o"></i>Cold Room Stock</a></li>
+                            <li id="li15"><a href="filmratechange.aspx?Dash Board=Packingsection"><i class="fa fa-circle-o">
+                            </i>Change Film Rate</a></li>
+                            <li id="li7"><a href="approve_filmrate.aspx?Dash Board=Packingsection"><i class="fa fa-circle-o">
+                            </i>Approve Film Rate</a></li>
+                        </ul>
+                    </li>
+                    <li id="ligheesection" class="treeview"><a href="#"><i class="fa fa-tty"></i><span>Ghee
+                        Sections</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="liGheeSection"><a href="gheeproductiondetails.aspx?Dash Board=GheeSection"><i
+                                class="fa fa-circle-o"></i>Ghee production Details</a></li>
+                            <li id="liGheeSection_wyra"><a href="gheeproductiondetailswyra.aspx?Dash Board=GheeSection"><i
+                                class="fa fa-circle-o"></i>Ghee production Details</a></li>
+                            <li id="li2"><a href="gheeclosing.aspx?Dash Board=GheeSection"><i class="fa fa-circle-o">
+                            </i>Ghee Product Wise Closing </a></li>
+                            <li id="li22"><a href="Gheesectionreport.aspx?Dash Board=GheeSection"><i class="fa fa-circle-o">
+                            </i>Ghee Production Report</a></li>
+                            <li id="li21"><a href="gheecreamreport.aspx?Dash Board=GheeSection"><i class="fa fa-circle-o">
+                            </i>Cream Production Report</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li id="libuttersection" class="treeview"><a href="#"><i class="fa fa-tty"></i><span>
+                        Butter Sections</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="li42"><a href="butterproductiondetails.aspx?Dash Board=buttersection"><i
+                                class="fa fa-circle-o"></i>Butter production Details</a></li>
+                            <li id="li48"><a href="butterproductionreport.aspx?Dash Board=buttersection"><i class="fa fa-circle-o">
+                            </i>Butter Production Report</a></li>
+                        </ul>
+                    </li>
+                    <li id="licurdsection" class="treeview"><a href="#"><i class="fa fa-bitbucket-square">
+                    </i><span>Curd Sections</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="lichemical"><a href="chemicalconsumption.aspx?Dash Board=CurdSection"><i
+                                class="fa fa-circle-o"></i>Chemical Consumption</a></li>
+                            <li id="li41"><a href="biproductsproduction.aspx?Dash Board=CurdSection"><i class="fa fa-circle-o">
+                            </i>BI-Products Production Details</a></li>
+                            <li id="liproduction"><a href="productiondetails.aspx?Dash Board=CurdSection"><i
+                                class="fa fa-circle-o"></i>Production Details</a></li>
+                            <li id="li34"><a href="biproductsclosing.aspx?Dash Board=CurdSection"><i class="fa fa-circle-o">
+                            </i>Curd Bi-Products closing</a></li>
+                            <li id="lipackingm"><a href="packingmaterial.aspx?Dash Board=CurdSection"><i class="fa fa-circle-o">
+                           </i>Packing Material </a></li>
+                             <li id="li67"><a href="otherplantbiproductsdetails.aspx?Dash Board=CurdSection"><i class="fa fa-circle-o">
+                            </i>Other Products</a></li>
+                            <li id="liproductionrpt"><a href="productionreport.aspx?Dash Board=CurdSection"><i
+                                class="fa fa-circle-o"></i>Production Report</a></li>
+                            <li id="licpkgreport"><a href="curdpkgreport.aspx?Dash Board=CurdSection"><i class="fa fa-circle-o">
+                                </i>Packing Report</a></li>
+                            <li id="li30"><a href="curdfilmcostperliter.aspx?Dash Board=CurdSection"><i class="fa fa-circle-o">
+                                </i>Film Cost Per Liter</a></li>
+                            <li id="li31"><a href="chemicalconsumptionreport.aspx?Dash Board=CurdSection"><i
+                                class="fa fa-circle-o"></i>Chemical Consumption Report</a></li>
+                        </ul>
+                    </li>
+                    <li id="liReport" class="treeview"><a href="#"><i class="fa fa-laptop"></i><span>Reports</span>
+                        <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="lirpttankerinward"><a href="TankersInwardReport.aspx?Dash Board=Reports"><i
+                                class="fa fa-edit"></i>Tankers Inward Report</a></li>
+                            <li id="liAcknowledge"><a href="Acknowledge.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>CC Acknowledge Report</a></li>
+                            <li id="liBranchwiseReport"><a href="BranchwiseReport.aspx?Dash Board=Reports"><i
+                                class="fa fa-edit"></i>Branch Summary Report</a></li>
+                            <li id="liVehicleWiseSummeryReport"><a href="VehicleWiseSummeryReport.aspx?Dash Board=Reports">
+                                <i class="fa fa-edit"></i>Vehicle Wise Summary Report</a></li>
+                            <li id="lirpttankeroutward"><a href="TankerOutwardReport.aspx?Dash Board=Reports"><i
+                                class="fa fa-edit"></i>Tankers Outward Report</a></li>
+                            <li id="lirptinwarddespatch"><a href="InwardReport.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>Inward Despatch Report</a></li>
+                            <li id="li40"><a href="DespatchReport.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>DC Scan Report</a></li>
+                            <li id="lirptinvoice"><a href="invoice.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>Despatch Report</a></li>
+                            <li id="liplantdcrpt"><a href="invoiceplantoutward.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i> Plant Despatch Report</a></li>
+                            <li id="lirpt_total_dc"><a href="Total_dc_report.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>Total Despatch Report</a></li>
+                            <li id="liDirectSalesReport"><a href="DirectSalesReport.aspx?Dash Board=Reports"><i
+                                class="fa fa-edit"></i>Direct Sales Report</a></li>
+                            <li id="lidirectpurchase"><a href="otherpartydirectsalesreport.aspx?Dash Board=Reports">
+                                <i class="fa fa-edit"></i>Direct Purchase report </a></li>
+                            <li id="lirpt_vendor"><a href="vendor_details_report.aspx?Dash Board=Reports"><i
+                                class="fa fa-edit"></i>Vendor Details Report</a></li>
+                            <li id="livariation"><a href="variationreport.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>Quantity Variation Report</a></li>
+                            <li id="litankerdiffrpt"><a href="tankerdiffreport.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>Tanker Difference Report</a></li>
+                            <li id="lidccompare"><a href="dcdestination.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>DC Comparison Report</a></li>
+                            <li id="licurdcildroom"><a href="curdcoldroomreport.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>Curd ColdRoom Temp Report </a></li>
+                            <li id="liqualitytesting"><a href="allqualitytestingdetailsreport.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>Quality Testing Report</a></li>
+                            <li id="lilogininfo"><a href="logininformation.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                            </i>Login Information Report</a></li>
+                            <li id="lientrsdsh"><a href="entrysdashboard.aspx?Dash Board=Reports"><i class="fa fa-edit">
+                             </i>Entries Dashboard </a></li>
+                        </ul>
+                    </li>
+                     <li id="licosting" class="treeview"><a href="#"><i class="fa fa-truck"></i><span>Costing & Tanker Reports</span>
+                      <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                              <li id="libatchwisequalitytesting"><a href="ohmaster.aspx"><i class="fa fa-circle-o">
+                            </i>OH Master </a></li>
+                            <li id="lisilowisequalitytesting"><a href="branchoverhead.aspx"><i
+                                class="fa fa-circle-o"></i>Branch Over Head </a></li>
+                            <li id="li1"><a href="monthlyoverheadreport.aspx"><i class="fa fa-circle-o"></i>
+                                Monthly OverHead Report </a></li>
+                            <li id="li14"><a href="ComparativeStatementAllBranches.aspx"><i class="fa fa-circle-o"></i>
+                                Comparative Statement All Branches</a></li>
+                            <li id="li65"><a href="ComparativeStatementofNetRealisation.aspx"><i class="fa fa-circle-o"></i>Comparative Statement of NetRealisation </a></li>
+                            <li id="lirealisationrpt"><a href="realisationrpt.aspx"><i class="fa fa-circle-o"></i>Realisation Report</a></li>
+                            <li id="li27"><a href="Tanker_purchase_costreport.aspx"><i class="fa fa-circle-o"></i>Tanker Purchase cost Report</a></li>
+                            <li id="li28"><a href="Tanker_sales_costreport.aspx"><i class="fa fa-circle-o"></i>Tanker
+                                Sales cost Report</a></li>
+                            <li id="li29"><a href="Tanker_forecastingreport.aspx"><i class="fa fa-circle-o"></i>
+                                Tanker Forecosting Report</a></li>
+                                <li id="li66"><a href="tradingreport.aspx"><i class="fa fa-circle-o"></i>
+                                Tanker Trading Report</a></li>
+                        </ul>
+                    </li>
+                    <li id="licashdetails" class="treeview"><a href="#"><i class="fa fa-money"></i><span>
+                        Cash Details</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="liCollections"><a href="Collections.aspx?Dash Board=CashDetails"><i class="fa fa-circle-o">
+                            </i>Collections</a></li>
+                            <li id="liCollectionReport"><a href="CollectionReport.aspx?Dash Board=CashDetails"><i
+                                class="fa fa-edit"></i>Collection Report</a></li>
+                        </ul>
+                    </li>
+                    <li id="liapprovemodule" class="treeview"><a href="#"><i class="fa fa-bar-chart"></i>
+                        <span>Approve Details </span><i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="li25"><a href="curdqualitytestingapproval.aspx?Dash Board=Approve"><i class="fa fa-circle-o">
+                            </i>Approve Curd Quality Testing Details </a></li>
+                            <li id="li35"><a href="gheequalitytestingapproval.aspx?Dash Board=Approve"><i class="fa fa-circle-o">
+                            </i>Approve Ghee Quality Testing Details </a></li>
+                        </ul>
+                    </li>
+                    <li id="liprocessingReort" class="treeview"><a href="#"><i class="fa fa-delicious"></i>
+                        <span>Processing Reports</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="li8"><a href="Inward_Silo_Report.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>Inward Silo Report</a></li>
+                            <li id="li9"><a href="Intra_Silo_Transaction_Report.aspx?Dash Board=ProcessingSections">
+                                <i class="fa fa-circle-o"></i>Intra Silo Transaction Report</a></li>
+                            <li id="li11"><a href="Outward_Silo_Report.aspx?Dash Board=ProcessingSections"><i
+                                class="fa fa-circle-o"></i>Outward Silo Report</a></li>
+                            <li id="li12"><a href="ShiftClosingReport.aspx?Dash Board=ProcessingSections"><i
+                                class="fa fa-circle-o"></i>Shift Wise Silo Closing Report</a></li>
+                            <li id="li13"><a href="Return_milk_detailsReport.aspx?Dash Board=ProcessingSections">
+                                <i class="fa fa-circle-o"></i>Return Milk Details Report</a></li>
+                            <li id="li_stdrpt"><a href="stdtest.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>Standardisation Report</a></li>
+                            <li id="listd_wyra"><a href="stdreportwyra.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>Standardisation Rpt</a></li>
+                            <li id="lisilorpt"><a href="SiloWiseReport.aspx?Dash Board=ProcessingSections"><i
+                                class="fa fa-circle-o"></i>SILO Wise Report</a></li>
+                            <li id="lisiloclosing"><a href="SiloWiseClosingReport.aspx?Dash Board=ProcessingSections">
+                                <i class="fa fa-circle-o"></i>SILO Wise Closing Report</a></li>
+                             <%--<li id="libatchwiseclosing"><a href="batchwiseclosingreport.aspx?Dash Board=ProcessingSections">
+                                <i class="fa fa-circle-o"></i>Batch Wise Closing Report</a></li>--%>
+                            <li id="licipcleaning"><a href="cipreport.aspx?Dash Board=ProcessingSections"><i
+                                class="fa fa-circle-o"></i>CIP Cleaning Report</a></li>
+                            <li id="lidailyreport"><a href="plantdailyreport.aspx?Dash Board=ProcessingSections">
+                                <i class="fa fa-circle-o"></i>Daily Report</a></li>
+                            <li id="li101"><a href="gainorlosereport.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>Daily Report Monthly</a></li>
+                            <li id="li36"><a href="stockreport.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                            </i>Stock Report </a></li>
+                            <li id="li47"><a href="smppreparationreport.aspx?Dash Board=ProcessingSections"><i
+                                class="fa fa-circle-o"></i>SMP Report </a></li>
+                            <li id="li53"><a href="deliverychallanreport.aspx?Dash Board=ProcessingSections"><i
+                                class="fa fa-circle-o"></i>Delivery Challan Report </a></li>
+                            <li id="li39"><a href="yeildreport.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                                </i>Yeild Report</a></li>
+                             <li id="li24"><a href="CreamProductionDetailsReport.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                                </i>Cream Production Details</a></li>
+                            <li class id="li3"><a href="WeighingDayReport.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o"></i>Weighing
+                                Day Report</a></li>
+                            <li id="limilkoscreenrpt"><a href="milkoscreenreport.aspx?Dash Board=ProcessingSections"><i class="fa fa-circle-o">
+                                 </i>Milko Screeen Report </a></li>
+                        </ul>
+                    </li>
+                    <li id="lipackingreport" class="treeview"><a href="#"><i class="fa fa-get-pocket"></i>
+                        <span>Packing Reports</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="liFilmconsumptionreport"><a href="Filmconsumptionreport.aspx?Dash Board=PkgReports">
+                                <i class="fa fa-circle-o"></i>Film Consumption Report</a></li>
+                            <li id="li60"><a href="monthlyfilimconsumption.aspx?Dash Board=PkgReports" Board=PkgReports"><i class="fa fa-circle-o">
+                            </i>Monthly Film Consumption Report</a></li>
+                            <li id="li4"><a href="Individualfilmwastage.aspx?Dash Board=PkgReports"><i class="fa fa-circle-o">
+                            </i>Product Wise Film Consumption</a></li>
+                            <li id="li13"><a href="filimreport.aspx?Dash Board=PkgReports"><i class="fa fa-circle-o">
+                            </i>Daily Film Cost Report</a></li>
+                            <li id="li6"><a href="BrandwiseFilmConsumption.aspx?Dash Board=PkgReports"><i class="fa fa-circle-o">
+                            </i>Brand wise Packets Report</a></li>
+                             <li id="li68"><a href="coldroomstockreport.aspx?Dash Board=PkgReports"><i class="fa fa-circle-o">
+                            </i>Cold Room Stock Report</a></li>
+                            <li id="li5"><a href="filmconsumpctiontax.aspx?Dash Board=PkgReports"><i class="fa fa-circle-o">
+                            </i>Taxwise Film Consumption</a></li>
+                        </ul>
+                    </li>
+                   <%-- <li id="liweighbridge" class="treeview"><a href="#"><i class="fa fa-balance-scale"></i>
+                        <span>Weighing Reports</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li class id="li3"><a href="WeighingDayReport.aspx"><i class="fa fa-circle-o"></i>Weighing
+                                Day Report</a></li>
+                        </ul>
+                    </li>--%>
+                    <%--<li id="limilkoscreen" class="treeview"><a href="#"><i class="fa fa-desktop"></i><span>
+                        Milko Screen Reports</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="limilkoscreenrpt"><a href="milkoscreenreport.aspx"><i class="fa fa-circle-o">
+                            </i>Milko Screeen Report </a></li>
+                        </ul>
+                    </li>--%>
+                    <li id="litallyreports" class="treeview"><a href="#"><i class="fa fa-text-height"></i>
+                        <span>Tally Reports</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="li26"><a href="purchasevocher.aspx"><i class="fa fa-circle-o"></i>Purchase Voucher
+                            </a></li>
+                            <li id="li16"><a href="salesvocher.aspx"><i class="fa fa-circle-o"></i>Sales Voucher
+                            </a></li>
+                            <li id="li10"><a href="directsalesvocher.aspx"><i class="fa fa-circle-o"></i>Direct
+                                Purchase Voucher </a></li>
+                            <li id="li19"><a href="directsalevocher.aspx"><i class="fa fa-circle-o"></i>Direct Sales
+                                Voucher </a></li>
+                            <%--<li id="li30"><a href="otherpartysalevocher.aspx"><i class="fa fa-circle-o"></i>Other
+                                Party Direct Sales Voucher </a></li>
+                            <li id="li24"><a href="otherpartydirectpurchasevocher.aspx"><i class="fa fa-circle-o">
+                            </i>Other Party Direct Purchase Voucher </a></li>--%>
+                        </ul>
+                    </li>
+                     <li id="lisapreports" class="treeview"><a href="#"><i class="fa fa-text-height"></i>
+                        <span>Sap Reports</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                        <li id="li64"><a href="sapsalesdetails.aspx"><i class="fa fa-circle-o">
+                            </i> Sap Sales Voucher </a></li>
+                           <li id="li17"><a href="purchasedetails.aspx"><i class="fa fa-circle-o">
+                            </i> Sap Purchase Voucher </a></li>
+                            <li id="li61"><a href="sapproduction.aspx"><i class="fa fa-circle-o">
+                            </i> Sap Production Details </a></li>
+                            <li id="li_sapkuppamrep"><a href="kuppamproductionreport.aspx"><i class="fa fa-circle-o">
+                            </i> Sap Kuppam Production Details </a></li>
+                         </ul>
+                     </li>
+                    <li id="lichartreport" class="treeview"><a href="#"><i class="fa fa-bar-chart"></i><span>
+                        Chart Reports </span><i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li id="li32"><a href="linechart.aspx"><i class="fa fa-line-chart"></i>Vendor wise details</a></li>
+                            <li id="li33"><a href="branchsummarychart.aspx"><i class="fa fa-line-chart"></i>Vendor
+                                wise Summary details </a></li>
+                            <li id="li49"><a href="sectionwisereport.aspx"><i class="fa fa-line-chart"></i>Section
+                                Wise Production details </a></li>
+                            <li id="li45"><a href="productwiseproduction.aspx"><i class="fa fa-line-chart"></i>Product
+                                Wise Production details </a></li>
+                            <li id="li46"><a href="batchpreparationsummarychart.aspx"><i class="fa fa-line-chart">
+                            </i>Batch Preparation Details </a></li>
+                            <li id="li50"><a href="returnmilkchart.aspx"><i class="fa fa-line-chart"></i>Return
+                                MiLK Details</a></li>
+                            <li id="li51"><a href="filimchart.aspx"><i class="fa fa-line-chart"></i>Film Details</a></li>
+                            <li id="li52"><a href="pichart.aspx"><i class="fa fa-line-chart"></i>Cow And Buffalow
+                                Details</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="navigation">
+                <ul>
+                    <li id="lihdashboard" class="test"><a href="DashBoard.aspx?Dash Board=DashBoard"><span
+                        id="spandashboard"><i class="fa fa-dashboard"></i>&nbsp DashBoard</span></a></li>
+                    <li id="lihmaster"><a href="AddBranch.aspx?Dash Board=Masters"><span id="spanmaster">
+                        <i class="fa fa-truck" aria-hidden="true"></i>Masters</span></a></li>
+                    <li id="lihoperation"><a href="Despatch_Entry.aspx?Dash Board=operations"><span id="spanoperation">
+                        Operations</span></a></li>
+                    <li id="lihprocessing"><a href="SiloMonitor.aspx?Dash Board=ProcessingSections"><span
+                        id="spanpsection">Proc Section</span></a></li>
+                    <li id="lihpackingsection"><a href="Packingsection.aspx?Dash Board=Packingsection"><span
+                        id="spanpkgsection">Pkg Section</span></a></li>
+                    <li id="lihgheesection"><a href="gheeproductiondetails.aspx?Dash Board=GheeSection">
+                        <span id="spangsection">Ghee Section</span></a></li>
+                    <li id="lihcurdsection"><a href="productiondetails.aspx?Dash Board=CurdSection"><span
+                        id="spancsection">Curd Section</span></a></li>
+                    <li id="libutter"><a href="butterproductiondetails.aspx?Dash Board=buttersection"><span
+                        id="Span1">Butter Section</span></a></li>
+                    <li id="lilabb"><a href="Inward.aspx?Dash Board=labsection"><span id="spnlab">Lab Section</span></a></li>
+                    <li id="lihcashdetails"><a href="Collections.aspx?Dash Board=CashDetails"><span id="spancd">
+                        Cash Details</span></a></li>
+                    <li id="lihreports"><a href="TankersInwardReport.aspx?Dash Board=Reports"><span id="spanreports">
+                        Reports</span></a> </li>
+                    <%--<li id="lihprocessingreports"><a href="Inward_Silo_Report.aspx?Dash Board=ProcReports">
+                        <span id="spanprocessingreports">Proc Reports</span></a></li>
+                    <li id="lihpackingreports"><a href="filimreport.aspx?Dash Board=PkgReports"><span
+                        id="spanpackingreports">Pkg Reports</span></a></li>--%>
+                </ul>
+            </div>
+            <!-- Main content -->
+            <section class="content">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+       
+<div class="pull-right hidden-xs">
+</div>
+        <strong>Copyright &copy; 2014-2015 <a target="_blank" href="http://vyshnavifoods.com">
+            Sri Vyshnavi Dairy Spl Pvt Ltd</a>.</strong> All rights reserved.
+      </footer>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Create the tabs -->
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i>
+                </a></li>
+                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears">
+                </i></a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Home tab content -->
+                <div class="tab-pane" id="control-sidebar-home-tab">
+                    <h3 class="control-sidebar-heading">
+                        Recent Activity</h3>
+                    <ul class="control-sidebar-menu">
+                        <li><a href="javascript::;"><i class="menu-icon fa fa-birthday-cake bg-red"></i>
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">
+                                    Langdon's Birthday</h4>
+                                <p>
+                                    Will be 23 on April 24th</p>
+                            </div>
+                        </a></li>
+                        <li><a href="javascript::;"><i class="menu-icon fa fa-user bg-yellow"></i>
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">
+                                    Frodo Updated His Profile</h4>
+                                <p>
+                                    New phone +1(800)555-1234</p>
+                            </div>
+                        </a></li>
+                        <li><a href="javascript::;"><i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">
+                                    Nora Joined Mailing List</h4>
+                                <p>
+                                    nora@example.com</p>
+                            </div>
+                        </a></li>
+                        <li><a href="javascript::;"><i class="menu-icon fa fa-file-code-o bg-green"></i>
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">
+                                    Cron Job 254 Executed</h4>
+                                <p>
+                                    Execution time 5 seconds</p>
+                            </div>
+                        </a></li>
+                    </ul>
+                    <!-- /.control-sidebar-menu -->
+                    <h3 class="control-sidebar-heading">
+                        Tasks Progress</h3>
+                    <ul class="control-sidebar-menu">
+                        <li><a href="javascript::;">
+                            <h4 class="control-sidebar-subheading">
+                                Custom Template Design <span class="label label-danger pull-right">70%</span>
+                            </h4>
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-danger" style="width: 70%">
+                                </div>
+                            </div>
+                        </a></li>
+                        <li><a href="javascript::;">
+                            <h4 class="control-sidebar-subheading">
+                                Update Resume <span class="label label-success pull-right">95%</span>
+                            </h4>
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-success" style="width: 95%">
+                                </div>
+                            </div>
+                        </a></li>
+                        <li><a href="javascript::;">
+                            <h4 class="control-sidebar-subheading">
+                                Laravel Integration <span class="label label-warning pull-right">50%</span>
+                            </h4>
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-warning" style="width: 50%">
+                                </div>
+                            </div>
+                        </a></li>
+                        <li><a href="javascript::;">
+                            <h4 class="control-sidebar-subheading">
+                                Back End Framework <span class="label label-primary pull-right">68%</span>
+                            </h4>
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-primary" style="width: 68%">
+                                </div>
+                            </div>
+                        </a></li>
+                    </ul>
+                    <!-- /.control-sidebar-menu -->
+                </div>
+                <!-- /.tab-pane -->
+                <!-- Stats tab content -->
+                <div class="tab-pane" id="control-sidebar-stats-tab">
+                    Stats Tab Content</div>
+                <!-- /.tab-pane -->
+                <!-- Settings tab content -->
+                <div class="tab-pane" id="control-sidebar-settings-tab">
+                    <form method="post">
+                    <h3 class="control-sidebar-heading">
+                        General Settings</h3>
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Report panel usage
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+                        <p>
+                            Some information about this general settings option
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Allow mail redirect
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+                        <p>
+                            Other sets of options are available
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Expose author name in posts
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+                        <p>
+                            Allow the user to show his name in blog posts
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+                    <h3 class="control-sidebar-heading">
+                        Chat Settings</h3>
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Show me as online
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Turn off notifications
+                            <input type="checkbox" class="pull-right">
+                        </label>
+                    </div>
+                    <!-- /.form-group -->
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Delete chat history <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o">
+                            </i></a>
+                        </label>
+                    </div>
+                    <!-- /.form-group -->
+                    </form>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+        <div class="control-sidebar-bg">
+        </div>
+    </div>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.4 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Morris.js charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <!-- Select2 -->
+    <script src="plugins/select2/select2.full.min.js"></script>
+    <!-- Sparkline -->
+    <script src="plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!-- jvectormap -->
+    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="plugins/knob/jquery.knob.js"></script>
+    <!-- daterangepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+    <script src="dist/js/demo.js"></script>
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.js"></script>
+    <link href="plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    </form>
+</body>
+</html>

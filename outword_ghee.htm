@@ -1,0 +1,57 @@
+﻿<div style="width: 100%; float: left; border: 1px solid #d6d6d6; border-radius: 5px 5px 5px 5px;
+    background-color: #FFFFEC">
+    <table align="left" cellpadding="0" cellspacing="0" style="float: left; width: 100%;"
+        id="table_outwordghee_details" class="mainText2" border="1">
+        <thead>
+            <!-- <tr>
+                            <td>
+                                <br />
+                            </td>
+                        </tr>-->
+            <tr>
+                <td style="width: 5%; text-align: center; height: 20px; font-size: 12px; font-weight: bold;
+                    color: #2f3293;">
+                    Sno
+                    <br />
+                </td>
+                <td style="width: 20%; height: 20px; color: #2f3293; font-size: 12px; font-weight: bold;
+                    text-align: center;">
+                    Product Type
+                    <br />
+                </td>
+              
+                <td style="width: 6%; text-align: center; height: 20px; font-size: 12px; font-weight: bold;
+                    color: #2f3293;">
+                    Quantity
+                    <br />
+                </td>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {#foreach $T as data}
+            <tr class="tblrowcolor">
+                <td style="width: 5%; height: 30px; vertical-align: middle; font-size: 12px; font-weight: 500;
+                    text-align: center; padding: 0px 0px 0px 3px">
+                    <span id="Span1" style="font-size: 10px; color: Red;"><b>{ $T.data.sno }</b></span>
+                 
+                </td>
+                <td style="width: 20%; height: 45px; vertical-align: middle; font-size: 12px; font-weight: 500;
+                    text-align: center; padding: 0px 0px 0px 3px">
+                    <span id="txt_Vendorname" style="font-size: 12px; font-weight: bold; color: #0252aa;">
+                        { $T.data.productname }</span>
+                    <input type="hidden" id="hdn_productid" value="{ $T.data.productid }" />
+                </td>
+                <td style="width: 6%; height: 45px; vertical-align: middle; font-size: 12px; font-weight: 500;
+                    text-align: center; padding: 0px 0px 0px 3px">
+                    <input type="number" id="txt_quantity" class="totqtyclass" value=""
+                        placeholder="Enter Rate" style="width: 80%; height: 30px; font-size: 16px; border: 1px solid gray;
+                        border-radius: 6px 6px 6px 6px;" />
+                </td>
+               
+            </tr>
+            {#/for}
+        </tbody>
+    </table>
+   
+</div>
